@@ -17,23 +17,25 @@ data class Account(
 )
 
 @ApplicationScoped
-class AccountService {
+open class AccountService {
 
     private val repo = ConcurrentHashMap<Long, Account>()
 
-    fun readAll(): List<Account> = repo.values.toList()
+    open fun readAll(): List<Account> = repo.values.toList()
 
 }
 
 @Path("accounts")
 @RequestScoped
 @Counted
-class AccountResource {
+open class AccountResource {
+
+
     @Inject
     private lateinit var service: AccountService
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    fun getAccounts() = Response.ok(service.readAll()).build()
+    open fun getAccounts() = Response.ok(service.readAll()).build()
 
 }

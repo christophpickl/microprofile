@@ -6,8 +6,8 @@ liberty {
         configDirectory = file('src/main/liberty/config')
         bootstrapProperties = [
                 'default.http.port' : httpPort,
-                'default.https.port': httpsPort,
-                'app.context.root': warContext
+                'default.https.port': httpsPort
+                // 'app.context.root': warContext
         ]
     }
     packageLiberty {
