@@ -1,0 +1,47 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'net.wasdev.wlp.gradle.plugins:liberty-gradle-plugin:2.5'
+    }
+}
+
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.2.71"
+}
+
+ext {
+    appName = "microprofile"
+    warContext = appName
+    versionJava = 1.8
+    httpPort = 8080
+    httpsPort = 8443
+}
+
+apply plugin: "war"
+apply from: "$rootDir/gradle/liberty.gradle"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    providedCompile("org.eclipse.microprofile:microprofile:2.0.1")
+    libertyRuntime 'io.openliberty:openliberty-runtime:18.0.0.3'
+}
+
+sourceCompatibility = versionJava
+targetCompatibility = versionJava
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = versionJava.toString()
+        freeCompilerArgs = ["-Xjsr305=strict"]
+    }
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}

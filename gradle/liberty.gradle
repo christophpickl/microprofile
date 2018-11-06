@@ -1,0 +1,23 @@
+// https://openliberty.io/guides/gradle-intro.html
+apply plugin: "liberty"
+
+liberty {
+    server {
+        configDirectory = file('src/main/liberty/config')
+        bootstrapProperties = [
+                'default.http.port' : httpPort,
+                'default.https.port': httpsPort,
+                'app.context.root': warContext
+        ]
+    }
+    packageLiberty {
+        include = 'usr'
+    }
+}
+
+libertyStart {
+    doLast {
+        println "The server is now running at http://localhost:${httpPort}/${warContext}"
+        println "To stop the server run './gradlew libertyStop'"
+    }
+}
