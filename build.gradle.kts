@@ -4,8 +4,12 @@ plugins {
     kotlin("jvm") version "1.2.71"
 }
 
+apply(plugin = "war")
+
 dependencies {
-    compile(kotlin("stdlib"))
+    implementation(kotlin("stdlib"))
+    // TODO change to "providedCompile"
+    implementation("org.eclipse.microprofile:microprofile:2.0.1")
     implementation("io.github.microutils:kotlin-logging:1.6.10")
     implementation("ch.qos.logback:logback-classic:1.2.3")
 }
