@@ -6,5 +6,6 @@
     </featureManager>
     <httpEndpoint httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint" host="*" />
     <applicationManager autoExpand="true" dropinsEnabled="false" />
+    <!-- TODO didn't work with evaluation a la: ${app...} -->
     <webApplication context-root="microprofile" location="microprofile.war" />
 </server>
